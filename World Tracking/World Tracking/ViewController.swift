@@ -50,13 +50,18 @@ class ViewController: UIViewController {
 //        node.addChildNode(boxNode)
 //        boxNode.addChildNode(doorNode)
         
+        let cylinder = SCNNode(geometry: SCNCylinder(radius: 0.1, height: 0.3))
+        cylinder.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+        cylinder.position = SCNVector3(0, 0, -0.3)
+        cylinder.eulerAngles = SCNVector3(0, 0, Float(90.degreesToRadians))
+        
         let pyramid = SCNNode(geometry: SCNPyramid(width: 0.1, height: 0.1, length: 0.1))
-        pyramid.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
-        pyramid.position = SCNVector3(0, 0, -0.3)
+        pyramid.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+        pyramid.position = SCNVector3(0, 0, -0.5)
+
         
-        pyramid.eulerAngles = SCNVector3(Float(90.degreesToRadians), 0, 0)
-        
-        self.sceneView.scene.rootNode.addChildNode(pyramid)
+        self.sceneView.scene.rootNode.addChildNode(cylinder)
+        cylinder.addChildNode(pyramid)
     }
     
     @IBAction func reset(_ sender: Any) {
