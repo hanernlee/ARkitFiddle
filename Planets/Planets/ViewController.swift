@@ -26,22 +26,46 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let earth = SCNNode()
-        earth.geometry = SCNSphere(radius: 0.20)
-        earth.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "Earth Day")
-        earth.geometry?.firstMaterial?.specular.contents = #imageLiteral(resourceName: "Earth Specular")
-        earth.position = SCNVector3(0, 0, -1)
+        let sun = SCNNode()
+        sun.geometry = SCNSphere(radius: 0.35)
+        sun.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "Sun Diffuse")
+        sun.position = SCNVector3(0, 0, -1)
+        sceneView.scene.rootNode.addChildNode(sun)
         
-        sceneView.scene.rootNode.addChildNode(earth)
+        let earthParent = SCNNode()
+        earthParent.position = SCNVector3(0, 0, -1)
+        sceneView.scene.rootNode.addChildNode(earthParent)
+        
+        let venusParent = SCNNode()
+        venusParent.position = SCNVector3(0, 0, -1)
+        sceneView.scene.rootNode.addChildNode(venusParent)
+
+        
+        let earth = planet(geometry: SCNSphere(radius: 0.2), diffuse: #imageLiteral(resourceName: "Earth Day"), specular: #imageLiteral(resourceName: "Earth Specular"), emission: #imageLiteral(resourceName: "Earth Emission"), normal: #imageLiteral(resourceName: "Earth Normal"), position: SCNVector3(1.2, 0 ,0))
+        
+        let venus = planet(geometry: SCNSphere(radius: 0.1), diffuse: #imageLiteral(resourceName: "Venus Surface"), specular: nil, emission: #imageLiteral(resourceName: "Venus Atmosphere"), normal: nil, position: SCNVector3(0.7, 0, 0))
+        
         
         let action = SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 8)
         let forever = SCNAction.repeatForever(action)
-        earth.runAction(forever)
+        
+        let earthParentRotation = SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 14)
+        let venusParentRotation = SCNAction.rotateBy(x: 0, y: CGFloat(360.degreesToRadians), z: 0, duration: 10)
+
+        sun.runAction(forever)
+        earthParent.addChildNode(earth)
+        venusParent.addChildNode(venus)
+
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func planet(geometry: SCNGeometry, diffuse: UIImage, specular: UIImage?, emission: UIImage?, normal: UIImage?, position: SCNVector3) -> SCNNode {
+        let planet = SCNNode(geometry: geometry)
+        planet.geometry?.firstMaterial?.diffuse.contents = diffuse
+        planet.geometry?.firstMaterial?.specular.contents = specular
+        planet.geometry?.firstMaterial?.emission.contents = emission
+        planet.geometry?.firstMaterial?.normal.contents = normal
+        planet.position = position
+        return planet
     }
 
 }

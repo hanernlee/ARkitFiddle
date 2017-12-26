@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "2k_earth_specular_map.jpg",
+      "filename" : "2k_earth_normal_map.png",
       "scale" : "1x"
     },
     {
