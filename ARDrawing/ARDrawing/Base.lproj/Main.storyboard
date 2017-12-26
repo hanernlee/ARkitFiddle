@@ -25,18 +25,18 @@
                                 <rect key="frame" x="154.5" y="602" width="65" height="45"/>
                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="11R-gG-Sb9"/>
                                     <constraint firstAttribute="height" constant="45" id="GYv-7N-vib"/>
                                     <constraint firstAttribute="width" constant="65" id="Hcb-hG-1Vf"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="OEr-PU-8Y1"/>
                                 </constraints>
                                 <state key="normal" title="Draw"/>
-                                <connections>
-                                    <action selector="draw:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ixN-NA-fc5"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="GaI-TJ-U1l" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4Bf-kp-wCO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="XNO-Ng-108" secondAttribute="bottom" constant="20" id="NAs-3e-aVs"/>
                             <constraint firstItem="GaI-TJ-U1l" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="NLM-KA-1Cf"/>
                             <constraint firstItem="XNO-Ng-108" firstAttribute="centerX" secondItem="GaI-TJ-U1l" secondAttribute="centerX" id="O3V-G8-St5"/>
                             <constraint firstItem="GaI-TJ-U1l" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="RHA-4Z-56Z"/>
