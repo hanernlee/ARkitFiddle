@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AvenirNext.ttc">
+            <string>AvenirNext-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -19,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0so-Yq-q8k">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="70" width="375" height="597"/>
                             </arscnView>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uF5-gi-H56">
                                 <rect key="frame" x="20" y="547" width="100" height="100"/>
@@ -43,6 +48,22 @@
                                     <action selector="reset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cqz-D8-KYL"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEN-RB-zfW">
+                                <rect key="frame" x="0.0" y="20" width="375" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Let's Play" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="reh-XO-b5x">
+                                        <rect key="frame" x="140" y="15" width="95" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="hDq-80-shc"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -50,15 +71,20 @@
                             <constraint firstItem="uF5-gi-H56" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="338-k7-jBU"/>
                             <constraint firstItem="0so-Yq-q8k" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Nfe-bq-OON"/>
                             <constraint firstItem="0so-Yq-q8k" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="OHG-sE-pxg"/>
+                            <constraint firstItem="fEN-RB-zfW" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Opn-tX-vgn"/>
+                            <constraint firstItem="fEN-RB-zfW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="XMc-Bw-l7e"/>
                             <constraint firstItem="0so-Yq-q8k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YV6-IF-Zgh"/>
-                            <constraint firstItem="0so-Yq-q8k" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="cBw-Xk-6pd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="uF5-gi-H56" secondAttribute="bottom" constant="20" id="iJJ-Zu-iwh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qqD-rd-eaX" secondAttribute="bottom" constant="20" id="mkr-7O-APk"/>
+                            <constraint firstItem="0so-Yq-q8k" firstAttribute="top" secondItem="fEN-RB-zfW" secondAttribute="bottom" id="vbY-44-2LC"/>
+                            <constraint firstItem="fEN-RB-zfW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wbo-7K-ugL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="play" destination="uF5-gi-H56" id="Xb5-Zn-ujI"/>
                         <outlet property="sceneView" destination="0so-Yq-q8k" id="cnE-WJ-zWg"/>
+                        <outlet property="timerLabel" destination="reh-XO-b5x" id="pny-fa-ecK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

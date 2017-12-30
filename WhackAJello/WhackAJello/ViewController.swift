@@ -8,10 +8,16 @@
 
 import UIKit
 import ARKit
+import Each
 
 class ViewController: UIViewController {
 
+    var timer = Each(1).seconds
+    var countdown = 10
+
     @IBOutlet weak var sceneView: ARSCNView!
+    @IBOutlet weak var play: UIButton!
+    @IBOutlet weak var timerLabel: UILabel!
     
     let configuration = ARWorldTrackingConfiguration()
     
@@ -26,16 +32,24 @@ class ViewController: UIViewController {
     }
     
     @IBAction func play(_ sender: UIButton) {
+        setTimer()
         addNode()
+        play.isEnabled = false
     }
     
     @IBAction func reset(_ sender: UIButton) {
+        timer.stop()
+        restoreTimer()
+        play.isEnabled = true
+        sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+            node.removeFromParentNode()
+        }
     }
     
     func addNode() {
         let jellyfishScene = SCNScene(named: "art.scnassets/Jellyfish.scn")
         let jellyfishNode = jellyfishScene?.rootNode.childNode(withName: "Jellyfish", recursively: false)
-        jellyfishNode?.position = SCNVector3(0, 0, -1)
+        jellyfishNode?.position = SCNVector3(randomNumbers(firstNum: -1, secondNum: 1), randomNumbers(firstNum: -0.5, secondNum: 0.5), randomNumbers(firstNum: -1, secondNum: 1))
         sceneView.scene.rootNode.addChildNode(jellyfishNode!)
         
     }
@@ -48,11 +62,20 @@ class ViewController: UIViewController {
         if hitTest.isEmpty {
             print("Didn't touch any objects")
         } else {
-            let results = hitTest.first!
-            let node = results.node
-            
-            if node.animationKeys.isEmpty {            
-                animateNode(node: node)
+            if countdown > 0 {
+                let results = hitTest.first!
+                let node = results.node
+                
+                if node.animationKeys.isEmpty {
+                    SCNTransaction.begin()
+                    animateNode(node: node)
+                    SCNTransaction.completionBlock = {
+                        node.removeFromParentNode()
+                        self.addNode()
+                        self.restoreTimer()
+                    }
+                    SCNTransaction.commit()
+                }
             }
         }
     }
@@ -65,6 +88,28 @@ class ViewController: UIViewController {
         spin.autoreverses = true
         spin.repeatCount = 5
         node.addAnimation(spin, forKey: "position")
+    }
+    
+    func randomNumbers(firstNum: CGFloat, secondNum: CGFloat) -> CGFloat {
+        return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
+    }
+    
+    func setTimer() {
+        timer.perform { () -> NextStep in
+            self.countdown -= 1
+            self.timerLabel.text = String(self.countdown)
+            
+            if self.countdown == 0 {
+                self.timerLabel.text = "You Lose"
+                return .stop
+            }
+            return .continue
+        }
+    }
+    
+    func restoreTimer() {
+        countdown = 10
+        timerLabel.text = String(countdown)
     }
 }
 
