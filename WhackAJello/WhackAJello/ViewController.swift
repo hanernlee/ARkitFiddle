@@ -49,10 +49,22 @@ class ViewController: UIViewController {
             print("Didn't touch any objects")
         } else {
             let results = hitTest.first!
-            let geometry = results.node.geometry
+            let node = results.node
             
-            
+            if node.animationKeys.isEmpty {            
+                animateNode(node: node)
+            }
         }
+    }
+    
+    func animateNode(node: SCNNode) {
+        let spin = CABasicAnimation(keyPath: "position")
+        spin.fromValue = node.presentation.position
+        spin.toValue = SCNVector3(node.presentation.position.x - 0.2, node.presentation.position.y - 0.2, node.presentation.position.z - 1)
+        spin.duration = 0.07
+        spin.autoreverses = true
+        spin.repeatCount = 5
+        node.addAnimation(spin, forKey: "position")
     }
 }
 
